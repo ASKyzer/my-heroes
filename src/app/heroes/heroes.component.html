@@ -1,0 +1,6 @@
+
+  <div *ngFor="let hero of heroes">
+    <p>{{ hero.name }}</p>
+    <p>{{ hero.description }}</p>
+    <img class="hero-thumbnail" src="{{ hero.thumbnail.path + '.' + hero.thumbnail.extension  }}" />
+  </div>
