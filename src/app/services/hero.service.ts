@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class HeroService extends DataService {
-
   constructor(http: Http) {
-    super("https://gateway.marvel.com:443/v1/public/characters?apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b", http)
+    let url = "https://gateway.marvel.com:443/v1/public/characters?limit=50&apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b"
+    super(url, http)
    }
 }
