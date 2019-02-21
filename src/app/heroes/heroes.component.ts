@@ -16,13 +16,9 @@ export class HeroesComponent implements OnInit {
   newHeroes = []
   currentHeroes: any[]
   character: string;
-  offset = 0;
-  offsetCount: number = 0;
+  offset: number = 0;
   finished = false
-  // array = [];
-  array = [];
-  sum = 100;
-  throttle = 300;
+  throttle = 150;
   scrollDistance = 1;
   scrollUpDistance = 2;
   direction = '';
@@ -32,17 +28,15 @@ export class HeroesComponent implements OnInit {
 
   onScrollDown (ev) {
     console.log('scrolled down!!', ev);
-    // get more movies
-    this.getMoreMovies()
+    this.getMoreHeroes()
     this.direction = 'down'
   }
   
-  getMoreMovies() {
+  getMoreHeroes() {
     this.offset += 50;
     console.log(this.offset)
-    let url = "https://gateway.marvel.com:443/v1/public/characters?limit=50&offset="+this.offset+"&apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b"
-    // console.log(url)
-    let cur = []
+    let url = "https://gateway.marvel.com:443/v1/public/characters?limit=50&offset=" + this.offset + "&apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b"
+    
     this.http.get(url)
       .subscribe(response => {
         const data = response.json()
@@ -50,40 +44,18 @@ export class HeroesComponent implements OnInit {
         console.log(data)
         this.concatHeroes(currentHeroes)
       })
-      // console.log(this.currentHeroes)
-      // // this.newHeroes = this.newHeroes.concat(this.currentHeroes)
-      // console.log(this.newHeroes)
   }
 
   concatHeroes(cur) {
-    console.log("concating")
-    console.log(cur)
-    console.log(this.newHeroes)
+    console.log("concat")
     this.newHeroes = this.newHeroes.concat(cur)
     console.log(this.newHeroes)
-  }
-  // onUp(ev) {
-  //   console.log('scrolled up!', ev);
-  //   const start = this.sum;
-  //   this.sum += 20;
-  //   this.prependItems(start, this.sum);
-  
-  //   this.direction = 'up';
-  // }
-  generateWord() {
-    return Math.random() * 5000;
   }
 
   ngOnInit() {
     this.service.getAll()
-      .subscribe(heroes => {
-        this.heroes = heroes.data.results
-        // this.newHe roes = heroes.data.results
-      })
-
+      .subscribe(heroes => this.heroes = heroes.data.results)
   }
-
-  
 
   filterSearch() {
     console.log(this.heroes)
@@ -98,7 +70,7 @@ export class HeroesComponent implements OnInit {
       })
   }
 
-  getImageUrl(hero) {
+  concatImageUrl(hero) {
     const imgPath = hero.thumbnail.path
     const imgExtension = hero.thumbnail.extension
     return imgPath.concat('.', imgExtension)

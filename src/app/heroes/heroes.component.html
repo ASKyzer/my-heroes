@@ -13,7 +13,7 @@
       <div *ngFor="let hero of heroes" class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
         <a href="">
             <div  class="card mb-2" style="width: 18rem;">
-              <img class="hero-thumbnail img img-fluid img-responsive" src="{{ getImageUrl(hero)  }}" />
+              <img class="hero-thumbnail img img-fluid img-responsive" src="{{ concatImageUrl(hero)  }}" />
               <div class="card-body">
                 <h5 class="card-title">{{ hero.name }}</h5>
               </div>
@@ -31,7 +31,7 @@
       <div *ngFor="let hero of newHeroes" class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
         <a href="">
             <div  class="card mb-2" style="width: 18rem;">
-              <img class="hero-thumbnail img img-fluid img-responsive" src="{{ getImageUrl(hero)  }}" />
+              <img class="hero-thumbnail img img-fluid img-responsive" src="{{ concatImageUrl(hero)  }}" />
               <div class="card-body">
                 <h5 class="card-title">{{ hero.name }}</h5>
               </div>
@@ -54,15 +54,3 @@
   You have loaded all of our available heroes!
 </div> -->
  <br><br>
-
- <!-- <h1 class="title well">
-    ngx-infinite-scroll v-{{nisVersion}}
-    <section>
-    <small>items: {{sum}}, now triggering scroll: {{direction}}</small>
-    </section>
-    <section>
-      <button class="btn btn-info" (click)="toggleModal()">Open Infinite Scroll in Modal</button>
-    </section>
-  </h1> -->
-  <!-- <modal *ngIf="modalOpen" (onClose)="toggleModal()"></modal> -->
-
