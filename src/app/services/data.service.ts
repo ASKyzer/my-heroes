@@ -10,6 +10,11 @@ export class DataService {
     return this.http.get(this.url)
       .pipe(map((response: any) => response.json()))
   }
+
+  // filterByEachLetter(resourse) {
+  //   return this.http.get(resourse)
+  //     .pipe(map((response: any) => response.json()))
+  // }
   
 }
 
