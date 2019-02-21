@@ -1,8 +1,8 @@
 import { Http } from '@angular/http';
 import { HeroService } from './../services/hero.service';
 import { Component, OnInit } from '@angular/core';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+// import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+// import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import * as _ from 'lodash'
 
 
@@ -33,6 +33,7 @@ export class HeroesComponent implements OnInit {
   }
   
   getMoreHeroes() {
+    // increase offset query param by 50
     this.offset += 50;
     console.log(this.offset)
     let url = "https://gateway.marvel.com:443/v1/public/characters?limit=50&offset=" + this.offset + "&apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b"
@@ -41,14 +42,15 @@ export class HeroesComponent implements OnInit {
       .subscribe(response => {
         const data = response.json()
         const currentHeroes = data.data.results
-        console.log(data)
-        this.concatHeroes(currentHeroes)
+        // Concat current heroes to the new heroes array
+        this.concatArrays(currentHeroes)
       })
   }
 
-  concatHeroes(cur) {
+  concatArrays(array) {
     console.log("concat")
-    this.newHeroes = this.newHeroes.concat(cur)
+    // concat the newHeroes array with the current array fetched on scroll down
+    this.newHeroes = this.newHeroes.concat(array)
     console.log(this.newHeroes)
   }
 
