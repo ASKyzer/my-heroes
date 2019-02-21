@@ -13,9 +13,10 @@ import * as _ from 'lodash'
 })
 export class HeroesComponent implements OnInit {
   heroes: any[]
-  newHeroes: any[]
+  newHeroes = []
+  currentHeroes: any[]
   character: string;
-  batch = 0;
+  offset = 0;
   offsetCount: number = 0;
   finished = false
   // array = [];
@@ -27,48 +28,39 @@ export class HeroesComponent implements OnInit {
   direction = '';
 
   constructor(private service: HeroService, private http: Http) { 
-    this.appendItems(0, this.sum);
   }
-
-  
-  addItems(startIndex, endIndex, _method) {
-    for (let i = 0; i < this.sum; ++i) {
-      this.array[_method]([i, ' ', this.generateWord()].join(''));
-    }
-  }
-  
-  appendItems(startIndex, endIndex) {
-    this.addItems(startIndex, endIndex, 'push');
-  }
-  
-  
-  // prependItems(startIndex, endIndex) {
-  //   this.addItems(startIndex, endIndex, 'unshift');
-  // }
 
   onScrollDown (ev) {
     console.log('scrolled down!!', ev);
     // get more movies
     this.getMoreMovies()
-    // add another 20 items
-    const start = this.sum;
-    this.sum += 20;
-    this.appendItems(start, this.sum);
-    
     this.direction = 'down'
   }
   
   getMoreMovies() {
-    this.batch += 50;
-    console.log(this.batch)
-    let url = "https://gateway.marvel.com:443/v1/public/characters?limit=50&offset="+this.batch+"&apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b"
-    console.log(url)
+    this.offset += 50;
+    console.log(this.offset)
+    let url = "https://gateway.marvel.com:443/v1/public/characters?limit=50&offset="+this.offset+"&apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b"
+    // console.log(url)
+    let cur = []
     this.http.get(url)
       .subscribe(response => {
         const data = response.json()
-        this.newHeroes = data.data.results
-        console.log(this.newHeroes)
+        const currentHeroes = data.data.results
+        console.log(data)
+        this.concatHeroes(currentHeroes)
       })
+      // console.log(this.currentHeroes)
+      // // this.newHeroes = this.newHeroes.concat(this.currentHeroes)
+      // console.log(this.newHeroes)
+  }
+
+  concatHeroes(cur) {
+    console.log("concating")
+    console.log(cur)
+    console.log(this.newHeroes)
+    this.newHeroes = this.newHeroes.concat(cur)
+    console.log(this.newHeroes)
   }
   // onUp(ev) {
   //   console.log('scrolled up!', ev);
@@ -84,14 +76,17 @@ export class HeroesComponent implements OnInit {
 
   ngOnInit() {
     this.service.getAll()
-      .subscribe(heroes => this.heroes = heroes.data.results)
+      .subscribe(heroes => {
+        this.heroes = heroes.data.results
+        // this.newHe roes = heroes.data.results
+      })
+
   }
 
   
 
-  filterSearch(batch, lastKey) {
+  filterSearch() {
     console.log(this.heroes)
-
     console.log(this.character)
     let url = "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=" + this.character +  "&apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b"
     console.log(url)
