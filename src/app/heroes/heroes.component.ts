@@ -19,7 +19,11 @@ export class HeroesComponent implements OnInit {
       .subscribe(heroes => this.heroes = heroes.data.results)
   }
 
+  
+
   filterSearch() {
+    console.log(this.heroes)
+
     console.log(this.character)
     let url = "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=" + this.character +  "&apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b"
     console.log(url)
