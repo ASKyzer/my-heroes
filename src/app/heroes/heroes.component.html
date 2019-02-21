@@ -1,6 +1,18 @@
 
-  <div *ngFor="let hero of heroes">
-    <p>{{ hero.name }}</p>
-    <p>{{ hero.description }}</p>
-    <img class="hero-thumbnail" src="{{ hero.thumbnail.path + '.' + hero.thumbnail.extension  }}" />
-  </div>
+ <div class="container">
+   <div class="row">
+    <div  class="card-group">
+      <div *ngFor="let hero of heroes" class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+        <a href="">
+            <div  class="card" style="width: 18rem;">
+              <img class="hero-thumbnail img img-fluid img-responsive" src="{{ getImageUrl(hero)  }}" />
+              <div class="card-body">
+                <h5 class="card-title">{{ hero.name }}</h5>
+              </div>
+            </div>
+          </a>
+      </div>
+    </div>
+   </div>
+ </div>
+ 

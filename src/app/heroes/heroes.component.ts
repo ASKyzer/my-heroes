@@ -1,5 +1,5 @@
+import { HeroService } from './../services/hero.service';
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
 
 @Component({
   selector: 'heroes',
@@ -7,21 +7,21 @@ import { Http } from '@angular/http';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
-  url = "https://gateway.marvel.com:443/v1/public/characters?apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b"
-  heroes = []
+  heroes: any[]
 
-  constructor(http: Http) { 
-    
-    http.get(this.url)
-      .subscribe(response => {
-        const data = response.json().data
-        this.heroes = data.results
-        console.log(this.heroes)
-      })
+  constructor(private service: HeroService) { 
   }
-
 
   ngOnInit() {
+    this.service.getAll()
+      .subscribe(heroes => this.heroes = heroes.data.results)
   }
 
+  getImageUrl(hero) {
+    console.log(hero)
+    const imgPath = hero.thumbnail.path
+    const imgExtension = hero.thumbnail.extension
+    return imgPath.concat('.', imgExtension)
+  }
+ 
 }
