@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
 import { FilterComponent } from './filter/filter.component';
 import { FormsModule }   from '@angular/forms';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { FormsModule }   from '@angular/forms';
   imports: [
     HttpModule,
     FormsModule,
-    BrowserModule
+    BrowserModule,
+    InfiniteScrollModule
   ],
   providers: [
     FilterService, 

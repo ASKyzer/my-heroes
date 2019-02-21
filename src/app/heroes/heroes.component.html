@@ -1,13 +1,12 @@
 <div style="text-align:left">
-    <h1 class="mt-5">
-      Search for your Favorite Marvel Characters!
-    </h1>
-    
-  </div>
-  
-  <!-- <h2>Here are some links to help you start: </h2> -->
-  <input [(ngModel)]="character"  (keyup)="filterSearch()" class=" mt-3 form-control form-control-lg" type="text" placeholder="Enter the hero's name">  
-  <br><br>
+  <h1 class="mt-5">
+    Search for your Favorite Marvel Characters!
+  </h1>
+</div>
+<!-- <h2>Here are some links to help you start: </h2> -->
+<input [(ngModel)]="character"  (keyup)="filterSearch()" class=" mt-3 form-control form-control-lg" type="text" placeholder="Enter the hero's name">  
+
+<br><br>
  <div class="container">
    <div class="row">
     <div  class="card-group">
@@ -25,3 +24,45 @@
    </div>
  </div>
  
+ <br><br>
+ <div class="container">
+   <div class="row">
+    <div  class="card-group">
+      <div *ngFor="let hero of newHeroes" class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+        <a href="">
+            <div  class="card mb-2" style="width: 18rem;">
+              <img class="hero-thumbnail img img-fluid img-responsive" src="{{ getImageUrl(hero)  }}" />
+              <div class="card-body">
+                <h5 class="card-title">{{ hero.name }}</h5>
+              </div>
+            </div>
+          </a>
+      </div>
+    </div>
+   </div>
+ </div>
+ <div class="search-results"
+ infinite-scroll
+ [infiniteScrollDistance]="scrollDistance"
+ [infiniteScrollThrottle]="throttle"
+ (scrolled)="onScrollDown()">
+</div>
+<!-- 
+<loading-spinner *ngIf="!finished"></loading-spinner>
+
+<div class="notification is-warning" *ngIf="finished">
+  You have loaded all of our available heroes!
+</div> -->
+ <br><br>
+
+ <!-- <h1 class="title well">
+    ngx-infinite-scroll v-{{nisVersion}}
+    <section>
+    <small>items: {{sum}}, now triggering scroll: {{direction}}</small>
+    </section>
+    <section>
+      <button class="btn btn-info" (click)="toggleModal()">Open Infinite Scroll in Modal</button>
+    </section>
+  </h1> -->
+  <!-- <modal *ngIf="modalOpen" (onClose)="toggleModal()"></modal> -->
+
