@@ -18,9 +18,9 @@ export class FilterComponent {
   }
   
   filterSearch() {
-    console.log(this.character)
+    // console.log(this.character)
     let url = "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=" + this.character +  "&apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b"
-    console.log(url)
+    // console.log(url)
     this.http.get(url)
       .subscribe(response => {
         const data = response.json()
@@ -30,7 +30,7 @@ export class FilterComponent {
   }
 
   getImageUrl(hero) {
-    console.log(hero)
+    // console.log(hero)
     const imgPath = hero.thumbnail.path
     const imgExtension = hero.thumbnail.extension
     return imgPath.concat('.', imgExtension)

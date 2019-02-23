@@ -21,6 +21,7 @@ export class HeroesComponent implements OnInit {
   scrollDistance = 1;
   scrollUpDistance = 2;
   direction = '';
+  isOpen: boolean;
 
   selectedHero: any
 
@@ -35,51 +36,62 @@ export class HeroesComponent implements OnInit {
   
   getMoreHeroes() {
     this.offset += 50;
-    console.log(this.offset)
+    // console.log(this.offset)
     let url = "https://gateway.marvel.com:443/v1/public/characters?limit=50&offset=" + this.offset + "&apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b"
     
     this.http.get(url)
       .subscribe(response => {
         const data = response.json()
         const currentHeroes = data.data.results
-        console.log(data)
+        // console.log(data)
         this.concatHeroes(currentHeroes)
       })
   }
 
   concatHeroes(cur) {
-    console.log("concat")
+    // console.log("concat")
     this.heroes = this.heroes.concat(cur)
-    console.log(this.heroes)
+    // console.log(this.heroes)
   }
 
   ngOnInit() {
+    this.isOpen = false;
     this.service.getAll()
       .subscribe(heroes => this.heroes = heroes.data.results)
   }
 
   filterSearch() {
-    console.log(this.heroes)
-    console.log(this.character)
-    let url = "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=" + this.character +  "&apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b"
-    console.log(url)
+    // console.log(this.heroes)
+    // console.log(this.character)
+    let url = "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=" + this.character +  "&limit=49&apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b"
+    // console.log(url)
     this.http.get(url)
       .subscribe(response => {
         const data = response.json()
         this.heroes = data.data.results
-        console.log(this.heroes)
+        // console.log(this.heroes)
       })
   }
 
+  classChangeEventFired(eventArgs) {
+    console.log("Heros Comp: the button was clicked")
+    this.isOpen = eventArgs
+    console.log(this.isOpen)
+  }
+
   concatImageUrl(hero) {
-    const imgPath = hero.thumbnail.path
+    const imgPath = hero.thumbnail.path + "/standard_fantastic"
     const imgExtension = hero.thumbnail.extension
     return imgPath.concat('.', imgExtension)
   }
 
   openSidePanel(hero) {
-    console.log(hero)
+    // console.log(hero)
+    // console.log(this.isOpen)
+    this.isOpen = true
     this.selectedHero = hero
+    // console.log(this.isOpen)
+
   }
  
 }

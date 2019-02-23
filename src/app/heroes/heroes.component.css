@@ -1,6 +1,6 @@
 .hero-thumbnail {
-  height: 220px;
   width: 100%;
+  object-fit: cover;
 }
 
 .card {
@@ -15,9 +15,28 @@
   height: 30px;
 }
 
+.card-col {
+  padding: 5px;
+}
+
 p {
   font-family: Lato;
 }
 .search-results {
   height: 100%;
+}
+
+side-panel {
+  width: 400px;
+  position: fixed;
+  top: 0;
+  right: -400px;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.panel-open {
+  position: fixed;
+  top: 0;
+  right: 0;
 }

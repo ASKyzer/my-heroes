@@ -10,7 +10,7 @@
  <div class="container">
    <div class="row">
     <div  class="card-group">
-      <div *ngFor="let hero of heroes" class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+      <div *ngFor="let hero of heroes" class="col-lg-2 col-md-3 col-sm-4 col-xs-6 card-col">
             <div (click)="openSidePanel(hero)" class="card mb-2" style="">
               <img class="hero-thumbnail img img-fluid img-responsive" src="{{ concatImageUrl(hero)  }}" />
               <div class="card-body">
@@ -29,4 +29,4 @@
  (scrolled)="onScrollDown()">
 </div>
  <br><br>
- <side-panel [selectedHero]="selectedHero"></side-panel>
+ <side-panel [class.panel-open]="isOpen" (change)="classChangeEventFired($event)" [selectedHero]="selectedHero"></side-panel>
