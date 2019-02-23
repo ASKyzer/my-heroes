@@ -1,0 +1,14 @@
+<div class="side-panel">
+    <h2>Side Panel</h2>
+
+  <button (click)="showCurrentHero(hero)" type="button" class="btn btn-primary">show current hero</button>
+
+  <div class="card mb-2" style="">
+      <img class="sp-image img img-fluid img-responsive" src="{{ concatImageUrl(selectedHero)  }}" />
+      <div class="card-body">
+        <h2 class="card-title">{{ selectedHero.name }} </h2>
+        <p>  {{ selectedHero.description }} </p>
+      </div>
+    </div>
+
+</div>

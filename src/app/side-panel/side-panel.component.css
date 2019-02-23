@@ -1,0 +1,12 @@
+.side-panel {
+  width: 30vw;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.sp-image {
+  width: 100%;
+}

@@ -1,9 +1,8 @@
 import { Http } from '@angular/http';
 import { HeroService } from './../services/hero.service';
-import { Component, OnInit } from '@angular/core';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+import { Component, OnInit, Input } from '@angular/core';
 import * as _ from 'lodash'
+import { SidePanelComponent } from '../side-panel/side-panel.component';
 
 
 @Component({
@@ -12,22 +11,24 @@ import * as _ from 'lodash'
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
+
   heroes: any[]
-  newHeroes = []
   currentHeroes: any[]
   character: string;
   offset: number = 0;
   finished = false
-  throttle = 150;
+  throttle = 100;
   scrollDistance = 1;
   scrollUpDistance = 2;
   direction = '';
+
+  selectedHero: any
 
   constructor(private service: HeroService, private http: Http) { 
   }
 
   onScrollDown (ev) {
-    console.log('scrolled down!!', ev);
+    if (this.heroes.length > 49)
     this.getMoreHeroes()
     this.direction = 'down'
   }
@@ -48,8 +49,8 @@ export class HeroesComponent implements OnInit {
 
   concatHeroes(cur) {
     console.log("concat")
-    this.newHeroes = this.newHeroes.concat(cur)
-    console.log(this.newHeroes)
+    this.heroes = this.heroes.concat(cur)
+    console.log(this.heroes)
   }
 
   ngOnInit() {
@@ -74,6 +75,11 @@ export class HeroesComponent implements OnInit {
     const imgPath = hero.thumbnail.path
     const imgExtension = hero.thumbnail.extension
     return imgPath.concat('.', imgExtension)
+  }
+
+  openSidePanel(hero) {
+    console.log(hero)
+    this.selectedHero = hero
   }
  
 }

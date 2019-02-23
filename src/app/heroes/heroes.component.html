@@ -11,46 +11,22 @@
    <div class="row">
     <div  class="card-group">
       <div *ngFor="let hero of heroes" class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-        <a href="">
-            <div  class="card mb-2" style="width: 18rem;">
+            <div (click)="openSidePanel(hero)" class="card mb-2" style="">
               <img class="hero-thumbnail img img-fluid img-responsive" src="{{ concatImageUrl(hero)  }}" />
               <div class="card-body">
                 <h5 class="card-title">{{ hero.name }}</h5>
               </div>
             </div>
-          </a>
       </div>
     </div>
    </div>
  </div>
  
- <br><br>
- <div class="container">
-   <div class="row">
-    <div  class="card-group">
-      <div *ngFor="let hero of newHeroes" class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-        <a href="">
-            <div  class="card mb-2" style="width: 18rem;">
-              <img class="hero-thumbnail img img-fluid img-responsive" src="{{ concatImageUrl(hero)  }}" />
-              <div class="card-body">
-                <h5 class="card-title">{{ hero.name }}</h5>
-              </div>
-            </div>
-          </a>
-      </div>
-    </div>
-   </div>
- </div>
  <div class="search-results"
  infinite-scroll
  [infiniteScrollDistance]="scrollDistance"
  [infiniteScrollThrottle]="throttle"
  (scrolled)="onScrollDown()">
 </div>
-<!-- 
-<loading-spinner *ngIf="!finished"></loading-spinner>
-
-<div class="notification is-warning" *ngIf="finished">
-  You have loaded all of our available heroes!
-</div> -->
  <br><br>
+ <side-panel [selectedHero]="selectedHero"></side-panel>

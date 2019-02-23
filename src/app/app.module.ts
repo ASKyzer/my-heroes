@@ -1,3 +1,4 @@
+import { SidePanelComponent } from './side-panel/side-panel.component';
 import { FilterService } from './services/filter.service';
 import { HeroService } from './services/hero.service';
 import { DataService } from './services/data.service';
@@ -16,6 +17,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     AppComponent,
     FilterComponent,
     HeroesComponent,
+    SidePanelComponent
   ],
   imports: [
     HttpModule,
