@@ -36,6 +36,12 @@ export class SidePanelComponent {
     return imgPath.concat('.', imgExtension)
   }
 
+  checkDescriptionAvailability(hero) {
+    console.log(hero)
+    if (hero.description) return hero.description
+    else return "This is a horrible database.  How do you not have images or descriptions of your super heroes?  Especially the image.  Don't you draw all these characters?"
+  }
+
 
   // getRelatedHeroes() {
   //   this.heroID = this.selectedHero.id
