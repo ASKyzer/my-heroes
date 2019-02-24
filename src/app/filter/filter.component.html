@@ -5,13 +5,13 @@
     </h1>
   </div>
   <!-- <h2>Here are some links to help you start: </h2> -->
-  <input [(ngModel)]="character"  (keyup)="filterSearch()" class=" mt-3 form-control form-control-lg" type="text" placeholder="Enter the hero's name">   
+  <input [(ngModel)]="character" (pressed)="searchFieldPressed($event)" (keyup)="filterSearch()" class=" mt-3 form-control form-control-lg" type="text" placeholder="Enter the hero's name">   
 </div>
 
 <div class="heroes-container container">
   <div class="row">
     <div  class="card-group">
-      <div *ngFor="let hero of heroes" class="col-lg-2 col-md-3 col-sm-4 col-xs-6 card-col scale-in-center">
+      <div *ngFor="let hero of filteredHeroes" class="col-lg-2 col-md-3 col-sm-4 col-xs-6 card-col scale-in-center">
         <div (click)="openSidePanel(hero)" class="card mb-2" style="">
           <img class="hero-thumbnail img img-fluid img-responsive" src="{{ concatImageUrl(hero)  }}" />
           <div class="card-body">

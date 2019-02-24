@@ -1,5 +1,5 @@
 import { FilterService } from './../services/filter.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'filter',
@@ -7,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./filter.component.css']
 })
 export class FilterComponent implements OnInit {
+  @Output('pressed') pressed = new EventEmitter()
+
   character: string;
-  heroes: any[];
+  filteredHeroes: any[];
   currentHeroes: any[]
   offset: number = 0;
   finished: boolean = false
@@ -20,11 +22,11 @@ export class FilterComponent implements OnInit {
   constructor(private filterService: FilterService  ) { }
   
   filterSearch() {
+    this.pressed.emit(this.character)
     this.filterService.filterSearch(this.character)
       .subscribe(response => {
         const data = response.json()
-        this.heroes = data.data.results
-        console.log(this.heroes)
+        this.filteredHeroes = data.data.results
       })
   }
 
@@ -34,7 +36,7 @@ export class FilterComponent implements OnInit {
   }
   
   getMoreFilterResults() {
-    this.offset += 50;    
+    this.offset += 50; 
     this.filterService.getMoreFilterResults(this.character, this.offset)
       .subscribe(response => {
         const data = response.json()
@@ -44,7 +46,7 @@ export class FilterComponent implements OnInit {
   }
 
   concatHeroes(cur) {
-    this.heroes = this.heroes.concat(cur)
+    this.filteredHeroes = this.filteredHeroes.concat(cur)
   }
 
   ngOnInit() {}

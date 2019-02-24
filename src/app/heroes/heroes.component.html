@@ -1,7 +1,7 @@
 <div [class.shrink-container]="isOpen" class="main-container">
   <filter></filter>
   
-  <div class="heroes-container container">
+  <div *ngIf="chracter !== ''" class="heroes-container container">
     <div class="row">
       <div  class="card-group">
         <div *ngFor="let hero of heroes" class="col-lg-2 col-md-3 col-sm-4 col-xs-6 card-col scale-in-center">
@@ -23,5 +23,5 @@
     (scrolled)="onScrollDown()">
   </div>
 
-  <side-panel [class.panel-open]="isOpen" (change)="classChangeEventFired($event)" [selectedHero]="selectedHero"></side-panel>
+  <side-panel *ngIf="selectedHero" [class.panel-open]="isOpen" (change)="classChangeEventFired($event)" [selectedHero]="selectedHero"></side-panel>
 </div>

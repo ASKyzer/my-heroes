@@ -1,9 +1,5 @@
-import { Http } from '@angular/http';
 import { HeroService } from './../services/hero.service';
 import { Component, OnInit, Input } from '@angular/core';
-import * as _ from 'lodash'
-import { SidePanelComponent } from '../side-panel/side-panel.component';
-
 
 @Component({
   selector: 'heroes',
@@ -25,7 +21,7 @@ export class HeroesComponent implements OnInit {
 
   selectedHero: any
 
-  constructor(private service: HeroService, private http: Http) { 
+  constructor(private heroService: HeroService) { 
   }
 
   onScrollDown (e) {
@@ -34,10 +30,8 @@ export class HeroesComponent implements OnInit {
   }
   
   getMoreHeroes() {
-    this.offset += 50;
-    let url = "https://gateway.marvel.com:443/v1/public/characters?limit=50&offset=" + this.offset + "&apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b"
-    
-    this.http.get(url)
+    this.offset += 50;    
+    this.heroService.getMoreHeroes(this.offset)
       .subscribe(response => {
         const data = response.json()
         const currentHeroes = data.data.results
@@ -51,14 +45,21 @@ export class HeroesComponent implements OnInit {
 
   ngOnInit() {
     this.isOpen = false;
-    this.service.getAll()
-      .subscribe(heroes => this.heroes = heroes.data.results)
+    this.heroService.getAll()
+      .subscribe(response => {
+        const data = response.json()
+        this.heroes = data.data.results
+      })
   }
 
   classChangeEventFired(eventArgs) {
-    console.log("Heros Comp: the button was clicked")
     this.isOpen = eventArgs
-    console.log(this.isOpen)
+  }
+
+  searchFieldPressed(eventArgs) {
+    console.log("search field Pressed")
+    console.log(eventArgs)
+    this.character = eventArgs
   }
 
   concatImageUrl(hero) {
