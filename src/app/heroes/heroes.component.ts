@@ -1,5 +1,5 @@
-import { HeroService } from './../services/hero.service';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { HeroService } from './../services/hero.service'
+import { Component, OnInit } from '@angular/core'
 
 @Component({
   selector: 'heroes',
@@ -12,20 +12,17 @@ export class HeroesComponent implements OnInit {
   selectedHero: any[]
   character: string = ''
   offset: number = 0
-  finished = false
-  throttle = 100
-  scrollDistance = 1
-  scrollUpDistance = 2
-  direction = ''
   isOpen: boolean
+  
+  // Scroll variables
+  throttle: number = 100
+  scrollDistance: number = 1
+  scrollUpDistance: number = 2
+  direction = ''
 
   constructor(private heroService: HeroService) { 
   }
 
-  onAllScroll (e) {
-    this.getMoreHeroes()
-    this.direction = 'down'
-  }
   
   getMoreHeroes() {
     this.offset += 50;    
@@ -33,15 +30,14 @@ export class HeroesComponent implements OnInit {
       .subscribe(response => {
         const data = response.json()
         const currentHeroes = data.data.results
-        this.concatHeroes(currentHeroes)
+        this.heroes = [...this.heroes, ...currentHeroes]
       })
   }
 
   filterSearch() {
     this.offset = 0
     if (this.character) {
-    console.log(this.character)
-    this.heroService.filterSearch(this.character)
+    this.heroService.filterSearchByStartsWith(this.character)
       .subscribe(response => {
         const data = response.json()
         this.heroes = data.data.results
@@ -50,51 +46,39 @@ export class HeroesComponent implements OnInit {
     else { this.ngOnInit() }
   }
 
-  onFilterScroll () {
-    console.log('on filer scroll called')
-    this.getMoreFilterResults()
-    this.direction = 'down'
-  }
-  
   getMoreFilterResults() {
     this.offset += 50; 
     this.heroService.getMoreFilterResults(this.character, this.offset)
       .subscribe(response => {
         const data = response.json()
         const currentHeroes = data.data.results
-        this.concatHeroes(currentHeroes)
+        this.heroes = [...this.heroes, ...currentHeroes]
       })
   }
 
+  onAllScroll () {
+    this.getMoreHeroes()
+    this.direction = 'down'
+  }
 
+  onFilterScroll () {
+    this.getMoreFilterResults()
+    this.direction = 'down'
+  }
+  
   resetSearch() {
     this.character = ''
     this.offset = 0
-    console.log('clicked')
     this.ngOnInit()
   }
+
+  classChangeEventFired(eventArgs) {
+      this.isOpen = eventArgs
+    }
 
   concatHeroes(cur) {
     this.heroes = this.heroes.concat(cur)
   }
-
-  ngOnInit() {
-    this.isOpen = false;
-    this.character = ''
-    this.heroService.getAll()
-      .subscribe(response => {
-        const data = response.json()
-        this.heroes = data.data.results
-      })
-  }
-
-  classChangeEventFired(eventArgs) {
-    this.isOpen = eventArgs
-  }
-
-  // searchFieldPressed(eventArgs) {
-  //   this.character = eventArgs
-  // }
 
   concatImageUrl(hero) {
     const imgPath = hero.thumbnail.path + "/standard_fantastic"
@@ -106,5 +90,14 @@ export class HeroesComponent implements OnInit {
     this.isOpen = true
     this.selectedHero = hero
   }
- 
+
+  ngOnInit() {
+    // this.isOpen = false;
+    this.character = ''
+    this.heroService.getAll()
+      .subscribe(response => {
+        const data = response.json()
+        this.heroes = data.data.results
+      })
+  }
 }

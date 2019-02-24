@@ -1,13 +1,13 @@
 <div [class.shrink-container]="isOpen" class="main-container">
   <div class="filter-container">
     <div style="text-align:left">
-      <h1 class="mt-5">
+      <h3 class="mt-5">
         Search for your Favorite Marvel Characters!
-      </h1>
+      </h3>
     </div>
     <div class="input-container">
       <input [(ngModel)]="character" (keyup)="filterSearch()" class=" mt-3 form-control form-control-lg" type="text" placeholder="Enter the hero's name">   
-      <div (click)="resetSearch()" class="btn btn-warning">Reset</div>
+      <div (click)="resetSearch()" class="btn btn-warning reset-btn">Reset</div>
     </div>
   </div>
   <div  *ngIf="character == ''; else elseBlock"  class="all-heroes">
@@ -35,7 +35,7 @@
   <ng-template #elseBlock class="filtered-heroes">
     <div class="heroes-container container">
       <div class="row">
-        <div  class="card-group">
+        <div class="card-group">
           <div *ngFor="let hero of heroes" class="col-lg-2 col-md-3 col-sm-4 col-xs-6 card-col scale-in-center">
             <div (click)="openSidePanel(hero)" class="card mb-2">
               <img class="hero-thumbnail img img-fluid img-responsive" src="{{ concatImageUrl(hero) }}" />
