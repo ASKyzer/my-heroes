@@ -8,20 +8,21 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.css']
 })
-export class FilterComponent {
+export class FilterComponent implements OnInit {
   character: string;
   heroes: any[];
+  offset: number = 0;
+  finished = false
+  throttle = 100;
+  scrollDistance = 1;
+  scrollUpDistance = 2;
+  direction = '';
   
 
-  constructor(private http: Http) { 
-   
-  }
+  constructor(private filterService: FilterService  ) { }
   
   filterSearch() {
-    // console.log(this.character)
-    let url = "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=" + this.character +  "&apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b"
-    // console.log(url)
-    this.http.get(url)
+    this.filterService.filterSearch(this.character)
       .subscribe(response => {
         const data = response.json()
         this.heroes = data.data.results
@@ -29,9 +30,10 @@ export class FilterComponent {
       })
   }
 
-  getImageUrl(hero) {
-    // console.log(hero)
-    const imgPath = hero.thumbnail.path
+  ngOnInit() {}
+
+  concatImageUrl(hero) {
+    const imgPath = hero.thumbnail.path + "/standard_fantastic"
     const imgExtension = hero.thumbnail.extension
     return imgPath.concat('.', imgExtension)
   }
