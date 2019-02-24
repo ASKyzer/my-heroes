@@ -22,7 +22,6 @@ export class HeroesComponent implements OnInit {
 
   constructor(private heroService: HeroService) { 
   }
-
   
   getMoreHeroes() {
     this.offset += 50;    
@@ -30,7 +29,7 @@ export class HeroesComponent implements OnInit {
       .subscribe(response => {
         const data = response.json()
         const currentHeroes = data.data.results
-        this.heroes = [...this.heroes, ...currentHeroes]
+        this.concatHeroes(currentHeroes)
       })
   }
 
@@ -52,8 +51,8 @@ export class HeroesComponent implements OnInit {
       .subscribe(response => {
         const data = response.json()
         const currentHeroes = data.data.results
-        this.heroes = [...this.heroes, ...currentHeroes]
-      })
+        this.concatHeroes(currentHeroes)
+    })
   }
 
   onAllScroll () {
@@ -76,8 +75,8 @@ export class HeroesComponent implements OnInit {
       this.isOpen = eventArgs
     }
 
-  concatHeroes(cur) {
-    this.heroes = this.heroes.concat(cur)
+  concatHeroes(currentHeroes) {
+    this.heroes = [...this.heroes, ...currentHeroes]
   }
 
   concatImageUrl(hero) {
@@ -92,7 +91,6 @@ export class HeroesComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.isOpen = false;
     this.character = ''
     this.heroService.getAll()
       .subscribe(response => {
