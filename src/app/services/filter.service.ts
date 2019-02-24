@@ -8,8 +8,13 @@ export class FilterService  {
   constructor(private http: Http) { }
 
   filterSearch(firstLetter) {
-    let url = "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=" + firstLetter +  "&limit=49&apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b"
+    let url: string = "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=" + firstLetter +  "&limit=50&apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b"
     return this.http.get(url);
+  }
+
+  getMoreFilterResults(firstLetter, offset) {
+    let url: string = "https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=" + firstLetter +  "&limit=50&offset=" + offset + "&apikey=a2b97ce44d7dfdb3d3410ff2eeb8693b"
+    return this.http.get(url)
   }
 }
 
