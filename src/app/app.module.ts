@@ -1,4 +1,5 @@
-import { FilterService } from './services/filter.service';
+import { SidePanelComponent } from './side-panel/side-panel.component';
+// import { FilterService } from './services/filter.service';
 import { HeroService } from './services/hero.service';
 import { DataService } from './services/data.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,8 +15,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 @NgModule({
   declarations: [
     AppComponent,
-    FilterComponent,
+    // FilterComponent,
     HeroesComponent,
+    SidePanelComponent
   ],
   imports: [
     HttpModule,
@@ -24,7 +26,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     InfiniteScrollModule
   ],
   providers: [
-    FilterService, 
+    // FilterService, 
     DataService,
     HeroService
   ],

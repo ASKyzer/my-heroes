@@ -2,7 +2,9 @@ import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class DataService {
   constructor(private url: string, private http: Http) { }
 
@@ -11,10 +13,5 @@ export class DataService {
       .pipe(map((response: any) => response.json()))
   }
 
-  // filterByEachLetter(resourse) {
-  //   return this.http.get(resourse)
-  //     .pipe(map((response: any) => response.json()))
-  // }
-  
 }
 
