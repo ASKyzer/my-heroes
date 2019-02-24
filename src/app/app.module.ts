@@ -1,7 +1,6 @@
 import { SidePanelComponent } from './side-panel/side-panel.component';
 import { FilterService } from './services/filter.service';
 import { HeroService } from './services/hero.service';
-import { DataService } from './services/data.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -27,7 +26,6 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
   ],
   providers: [
     FilterService, 
-    DataService,
     HeroService
   ],
   bootstrap: [AppComponent]

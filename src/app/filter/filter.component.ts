@@ -1,7 +1,5 @@
-import { DataService } from './../services/data.service';
 import { FilterService } from './../services/filter.service';
-import { Http } from '@angular/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'filter',
@@ -9,25 +7,46 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./filter.component.css']
 })
 export class FilterComponent implements OnInit {
-  character: string;
-  heroes: any[];
-  offset: number = 0;
-  finished = false
-  throttle = 100;
-  scrollDistance = 1;
-  scrollUpDistance = 2;
-  direction = '';
-  
+  @Output('pressed') pressed = new EventEmitter()
 
+  character: string;
+  filteredHeroes: any[];
+  currentHeroes: any[]
+  offset: number = 0;
+  finished: boolean = false
+  throttle: number = 100;
+  scrollDistance: number = 1;
+  scrollUpDistance: number = 2;
+  direction: string = '';
+  
   constructor(private filterService: FilterService  ) { }
   
   filterSearch() {
+    this.pressed.emit(this.character)
     this.filterService.filterSearch(this.character)
       .subscribe(response => {
         const data = response.json()
-        this.heroes = data.data.results
-        console.log(this.heroes)
+        this.filteredHeroes = data.data.results
       })
+  }
+
+  onScrollDown () {
+    this.getMoreFilterResults()
+    this.direction = 'down'
+  }
+  
+  getMoreFilterResults() {
+    this.offset += 50; 
+    this.filterService.getMoreFilterResults(this.character, this.offset)
+      .subscribe(response => {
+        const data = response.json()
+        const currentHeroes = data.data.results
+        this.concatHeroes(currentHeroes)
+      })
+  }
+
+  concatHeroes(cur) {
+    this.filteredHeroes = this.filteredHeroes.concat(cur)
   }
 
   ngOnInit() {}
