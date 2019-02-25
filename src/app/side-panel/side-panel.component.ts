@@ -1,3 +1,4 @@
+import { CommonMethodsService } from './../services/common-methods.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -11,7 +12,7 @@ export class SidePanelComponent {
 
   @Output('change') change = new EventEmitter()
 
-  constructor() {}
+  constructor(private commonService: CommonMethodsService) {}
 
   closeSidePanel() {
     this.change.emit(this.isOpen = false)
@@ -19,9 +20,7 @@ export class SidePanelComponent {
   }
  
   concatImageUrl(hero) {
-    const imgPath = hero.thumbnail.path + "/standard_fantastic"
-    const imgExtension = hero.thumbnail.extension
-    return imgPath.concat('.', imgExtension)
+    return this.commonService.concatImageUrl(hero)
   }
 
   checkDescriptionAvailability(hero) {

@@ -1,3 +1,4 @@
+import { CommonMethodsService } from './../services/common-methods.service';
 import { HeroService } from './../services/hero.service'
 import { Component, OnInit } from '@angular/core'
 
@@ -21,7 +22,7 @@ export class HeroesComponent implements OnInit {
   scrollUpDistance: number = 2
   direction = ''
 
-  constructor(private heroService: HeroService) { 
+  constructor(private heroService: HeroService, private commonService: CommonMethodsService) { 
   }
   
   getMoreHeroes() {
@@ -29,7 +30,7 @@ export class HeroesComponent implements OnInit {
     this.heroService.getMoreHeroes(this.offset)
       .subscribe(heroes => {
         const currentHeroes = heroes.data.results
-        this.heroes = this.concatArrays(this.heroes, currentHeroes)
+        this.heroes = this.commonService.concatArrays(this.heroes, currentHeroes)
       })
   }
 
@@ -47,7 +48,7 @@ export class HeroesComponent implements OnInit {
     this.heroService.getMoreFilterResults(this.character, this.offset)
       .subscribe(heroes => {
         const currentHeroes = heroes.data.results
-        this.heroes = this.concatArrays(this.heroes, currentHeroes)
+        this.heroes = this.commonService.concatArrays(this.heroes, currentHeroes)
     })
   }
 
@@ -70,15 +71,9 @@ export class HeroesComponent implements OnInit {
   classChangeEventFired(eventArgs) {
       this.isOpen = eventArgs
     }
-
-  concatArrays(arr1, arr2) {
-    return [...arr1, ...arr2]
-  }
-
+    
   concatImageUrl(hero) {
-    const imgPath = hero.thumbnail.path + "/standard_fantastic"
-    const imgExtension = hero.thumbnail.extension
-    return imgPath.concat('.', imgExtension)
+    return this.commonService.concatImageUrl(hero)
   }
 
   openSidePanel(hero) {
