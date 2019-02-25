@@ -14,9 +14,9 @@
     <div class="heroes-container container">
       <div class="row">
         <div  class="card-group">
-          <div *ngFor="let hero of heroes" class="col-lg-2 col-md-3 col-sm-4 col-xs-6 card-col scale-in-center">
-            <div (click)="openSidePanel(hero)" class="card mb-2">
-              <img class="hero-thumbnail img img-fluid img-responsive" src="{{ concatImageUrl(hero) }}" />
+          <div *ngFor="let hero of heroes" class="hero-col col-lg-2 col-md-3 col-sm-4 col-xs-6 card-col scale-in-center">
+            <div (click)="openSidePanel(hero)" class="hero-thumbnail card mb-2">
+              <img class="hero-thumbnail-image img img-fluid img-responsive" src="{{ concatImageUrl(hero) }}" />
               <div class="card-body">
                 <h5 class="card-title hero-thumbnail-title">{{ hero.name }}</h5>
               </div>
@@ -36,9 +36,9 @@
     <div class="heroes-container container">
       <div class="row">
         <div class="card-group">
-          <div *ngFor="let hero of heroes" class="col-lg-2 col-md-3 col-sm-4 col-xs-6 card-col scale-in-center">
-            <div (click)="openSidePanel(hero)" class="card mb-2">
-              <img class="hero-thumbnail img img-fluid img-responsive" src="{{ concatImageUrl(hero) }}" />
+          <div *ngFor="let hero of heroes" class="hero-col col-lg-2 col-md-3 col-sm-4 col-xs-6 card-col scale-in-center">
+            <div (click)="openSidePanel(hero)" class="hero-thumbnail card mb-2">
+              <img class="hero-thumbnail-image img img-fluid img-responsive" src="{{ concatImageUrl(hero) }}" />
               <div class="card-body">
                 <h5 class="card-title hero-thumbnail-title">{{ hero.name }}</h5>
               </div>

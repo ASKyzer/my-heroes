@@ -1,0 +1,42 @@
+$colorMint: #87C186;
+$colorLightGray: #EBEBEB;
+$colorVeryDarkGray: #171717;
+$colorGoldMustard: #D1AB1D;
+
+$thinLightBorder: 1px solid #FDFDFD;
+
+@mixin flex { display: flex; }
+
+@mixin flexAlignmentProperties($direction, $align, $justifyContent, $justifyItems) {
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justifyContent;
+  justify-items: $justifyItems
+}
+
+@mixin darkShadow($color) {
+  box-shadow: 1px 1px 10px $color;
+}
+  
+.side-panel {
+  @include flex;
+  @include flexAlignmentProperties(column, center, space-between, auto);
+  border-left: $thinLightBorder;
+  background-color: $colorMint;
+  height: 100%;
+  overflow: scroll;
+  z-index: 100;
+}
+
+.sp-close-btn { font-size: 24px; }
+.sp-body { padding: 10px;}
+
+.sp-image {
+  @include darkShadow($colorVeryDarkGray);
+  width: 100%;
+}
+
+.more-details-btn {
+  width: 80%;
+  margin-bottom: 10px;
+}
