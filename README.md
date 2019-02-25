@@ -1,6 +1,20 @@
 # MyHeroes
 
+Welcome to My Marvel-ous Marvel Superheroes App.  Here, you can find every hero in the Marvel Comics Series. You can browse through all of them or search by name.  Click on the thumbnail for more details about the hero.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.2.
+Using the Marvel Comics API. https://developer.marvel.com/
+
+the deployed app can be found on https://askyzer.github.io/my-heroes/index.html
+
+## Instructions on how to build and run this application.
+
+1. Clone this repository
+2. Run npm install to retrieve all dependencies
+3. To run the application locally, run ng serve and navigate to `http://localhost:4200/`
+4. To build the application, run ng build in the command line
+5. If you'd like to host it on your own GitHub Pages, initialize a new repository on your account and push to master.  Then, follow the instructions on the page: https://help.github.com/en/articles/configuring-a-publishing-source-for-github-pages#publishing-your-github-pages-site-from-a-docs-folder-on-your-master-branch to publish from your master/docs folder.
+
 
 ## Development server
 
