@@ -55,5 +55,5 @@
     </div>
   </ng-template>
 
-  <side-panel *ngIf="selectedHero" [class.panel-open]="isOpen" (change)="classChangeEventFired($event)" [selectedHero]="selectedHero"></side-panel>
+  <side-panel [class.panel-open]="isOpen" (change)="classChangeEventFired($event)" [selectedHero]="selectedHero"></side-panel>
 </div>

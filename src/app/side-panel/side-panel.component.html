@@ -1,4 +1,4 @@
-<div class="side-panel">
+<div *ngIf="selectedHero" class="side-panel">
  <div class="sp-content card">
     <button (click)="closeSidePanel()" class="btn btn-warning sp-close-btn" >X</button>
     <img class="sp-image img img-fluid img-responsive" src="{{ concatImageUrl(selectedHero)  }}" />
