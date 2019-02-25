@@ -32,4 +32,10 @@
   transition: all $duration ease;
 }
 
+@mixin circle($height, $width) {
+  border-radius: 50%;
+  height: $height;
+  width: $width;
+}
+
 

@@ -6,9 +6,10 @@
       <h2 class="sp-title card-title">{{ selectedHero.name }} </h2>
       <p class="sp-description mt-3">  {{ checkDescriptionAvailability(selectedHero) }} </p>
       <div class="related-heroes-container">
-          <h3>Related Heroes:
-            <button class="btn btn-warning">See Related Heroes</button>
-          </h3>
+          <h3>Related Heroes:</h3>
+          <div class="related-heroes">
+            <img src="{{ relatedHeroes }}" alt="" class="realated-heroes-image img img-fluid img-responsive">
+          </div>
         </div>
     </div>
   </div>

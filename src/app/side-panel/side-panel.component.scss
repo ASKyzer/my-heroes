@@ -11,7 +11,16 @@
   z-index: 100;
 }
 
-.sp-close-btn { font-size: 24px; }
+.sp-close-btn { 
+  @include positionTopLeft(absolute, 10px, 12px);
+  @include transitionEaseAll(.5s);
+  @include circle(50px, 50px);
+  font-size: 24px;
+}
+.sp-close-btn:hover {
+  @include transitionEaseAll(.5s);
+  transform: rotate(90deg)
+}
 .sp-body { padding: 10px;}
 
 .sp-image {
