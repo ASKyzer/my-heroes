@@ -12,7 +12,7 @@ the deployed app can be found on https://askyzer.github.io/my-heroes/index.html
 1. Clone this repository
 2. Run npm install to retrieve all dependencies
 3. To run the application locally, run ng serve and navigate to `http://localhost:4200/`
-4. To build the application, run ng build in the command line
+4. To build the application, run $ ng build --prod --base-href "https://<YOUR_GITHUB_USER-NAME>.github.io/<YOUR_REPO_NAME>/"
 5. If you'd like to host it on your own GitHub Pages, initialize a new repository on your account and push to master.  Then, follow the instructions on the page: https://help.github.com/en/articles/configuring-a-publishing-source-for-github-pages#publishing-your-github-pages-site-from-a-docs-folder-on-your-master-branch to publish from your master/docs folder.
 
 
