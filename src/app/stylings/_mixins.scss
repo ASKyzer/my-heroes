@@ -1,0 +1,35 @@
+
+@mixin positionTopLeft($position, $topNum, $leftNum) {
+  position: $position;
+  top: $topNum;
+  left: $leftNum;
+}
+
+@mixin positionTopRight($position, $topNum, $rightNum) {
+  position: $position;
+  top: $topNum;
+  right: $rightNum;
+}
+
+@mixin flex { display: flex; }
+@mixin flexAlignmentProperties($direction, $align, $justifyContent, $justifyItems) {
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justifyContent;
+  justify-items: $justifyItems
+}
+
+@mixin boxOnly {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin darkShadow($color) {
+  box-shadow: 1px 1px 10px $color;
+}
+
+@mixin transitionEaseAll($duration) {
+  transition: all $duration ease;
+}
+
+

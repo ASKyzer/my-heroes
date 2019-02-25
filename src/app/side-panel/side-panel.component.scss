@@ -1,23 +1,6 @@
-$colorMint: #87C186;
-$colorLightGray: #EBEBEB;
-$colorVeryDarkGray: #171717;
-$colorGoldMustard: #D1AB1D;
+@import "../stylings/variables";
+@import "../stylings/mixins";
 
-$thinLightBorder: 1px solid #FDFDFD;
-
-@mixin flex { display: flex; }
-
-@mixin flexAlignmentProperties($direction, $align, $justifyContent, $justifyItems) {
-  flex-direction: $direction;
-  align-items: $align;
-  justify-content: $justifyContent;
-  justify-items: $justifyItems
-}
-
-@mixin darkShadow($color) {
-  box-shadow: 1px 1px 10px $color;
-}
-  
 .side-panel {
   @include flex;
   @include flexAlignmentProperties(column, center, space-between, auto);
