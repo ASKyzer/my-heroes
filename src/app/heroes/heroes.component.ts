@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core'
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.scss']
 })
+
 export class HeroesComponent implements OnInit {
   heroes: any[]
   currentHeroes: any[]
@@ -26,10 +27,9 @@ export class HeroesComponent implements OnInit {
   getMoreHeroes() {
     this.offset += 50;    
     this.heroService.getMoreHeroes(this.offset)
-      .subscribe(response => {
-        const data = response.json()
-        const currentHeroes = data.data.results
-        this.concatHeroes(currentHeroes)
+      .subscribe(heroes => {
+        const currentHeroes = heroes.data.results
+        this.heroes = this.concatArrays(this.heroes, currentHeroes)
       })
   }
 
@@ -37,10 +37,7 @@ export class HeroesComponent implements OnInit {
     this.offset = 0
     if (this.character) {
     this.heroService.filterSearchByStartsWith(this.character)
-      .subscribe(response => {
-        const data = response.json()
-        this.heroes = data.data.results
-      })
+      .subscribe(heroes => this.heroes = heroes.data.results)
     }
     else { this.ngOnInit() }
   }
@@ -48,10 +45,9 @@ export class HeroesComponent implements OnInit {
   getMoreFilterResults() {
     this.offset += 50; 
     this.heroService.getMoreFilterResults(this.character, this.offset)
-      .subscribe(response => {
-        const data = response.json()
-        const currentHeroes = data.data.results
-        this.concatHeroes(currentHeroes)
+      .subscribe(heroes => {
+        const currentHeroes = heroes.data.results
+        this.heroes = this.concatArrays(this.heroes, currentHeroes)
     })
   }
 
@@ -75,8 +71,8 @@ export class HeroesComponent implements OnInit {
       this.isOpen = eventArgs
     }
 
-  concatHeroes(currentHeroes) {
-    this.heroes = [...this.heroes, ...currentHeroes]
+  concatArrays(arr1, arr2) {
+    return [...arr1, ...arr2]
   }
 
   concatImageUrl(hero) {
@@ -93,9 +89,6 @@ export class HeroesComponent implements OnInit {
   ngOnInit() {
     this.character = ''
     this.heroService.getAll()
-      .subscribe(response => {
-        const data = response.json()
-        this.heroes = data.data.results
-      })
+      .subscribe(heroes => this.heroes = heroes.data.results)
   }
 }
