@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core'
 @Component({
   selector: 'heroes',
   templateUrl: './heroes.component.html',
-  styleUrls: ['./heroes.component.css']
+  styleUrls: ['./heroes.component.scss']
 })
 export class HeroesComponent implements OnInit {
   heroes: any[]

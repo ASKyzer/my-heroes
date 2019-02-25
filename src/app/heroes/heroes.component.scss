@@ -1,0 +1,125 @@
+$colorMint: #87C186;
+$colorLightGray: #EBEBEB;
+$colorVeryDarkGray: #171717;
+$colorGoldMustard: #D1AB1D;
+$colorBlack: #000000;
+
+$thinDarkBorder: 1px solid #101010;
+$thinLightBorder: 1px solid #FDFDFD;
+
+@mixin positionTopLeft($position, $topNum, $leftNum) {
+  position: $position;
+  top: $topNum;
+  left: $leftNum;
+}
+
+@mixin positionTopRight($position, $topNum, $rightNum) {
+  position: $position;
+  top: $topNum;
+  right: $rightNum;
+}
+
+@mixin flex { display: flex; }
+
+@mixin boxOnly {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin darkShadow($color) {
+  box-shadow: 1px 1px 10px $color;
+}
+
+@mixin transitionEaseAll($duration) {
+  transition: all $duration ease;
+}
+
+.filter-container {
+  @include positionTopLeft(fixed, 0, 0);
+  background-color: $colorGoldMustard;
+  border-bottom: $thinDarkBorder;
+  padding: 0 50px 30px 50px;
+  width: 100%;
+  z-index: 5;
+}
+
+.input-container { display: flex; }
+
+.reset-btn {
+  background-color:$colorMint;
+  border: $thinLightBorder;
+  margin-left: 5px;
+}
+
+.heroes-container { padding-top: 150px; }
+
+.hero-col { padding: 5px; }
+
+.hero-thumbnail {
+  @include boxOnly();
+  @include darkShadow($colorVeryDarkGray);
+  border: $thinDarkBorder;
+  margin-bottom: 10px;
+} 
+
+.hero-thumbnail-image { width: 100%; }
+
+.hero-thumbnail-title {
+  background-color: $colorMint;
+  height: 40px;
+  margin: 0;
+  padding: 3px;
+  text-align: center;
+} 
+
+
+/* .search-results { height: 100%; } */
+
+side-panel {
+  @include positionTopRight(fixed, 0, -450px);
+  @include transitionEaseAll(.5s);
+  background-color: $colorMint;
+  height: 100%;
+  width: 450px;
+  overflow: scroll;
+  z-index: 100;
+}
+
+.panel-open {
+  @include positionTopRight(fixed, 0, 0);
+  @include transitionEaseAll(.4s);
+}
+
+.scale-in-center {
+	-webkit-animation: scale-in-center 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: scale-in-center 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+ @-webkit-keyframes scale-in-center {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes scale-in-center {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  side-panel { width: 100%; }
+}

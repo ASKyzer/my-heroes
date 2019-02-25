@@ -1,10 +1,10 @@
 <div class="side-panel">
- <div class="card">
-    <button (click)="closeSidePanel()" class="btn btn-warning side-panel-close-btn" >X</button>
+ <div class="sp-content card">
+    <button (click)="closeSidePanel()" class="btn btn-warning sp-close-btn" >X</button>
     <img class="sp-image img img-fluid img-responsive" src="{{ concatImageUrl(selectedHero)  }}" />
-    <div class="card-body">
-      <h2 class="card-title">{{ selectedHero.name }} </h2>
-      <p class="mt-3">  {{ checkDescriptionAvailability(selectedHero) }} </p>
+    <div class="sp-body card-body">
+      <h2 class="sp-title card-title">{{ selectedHero.name }} </h2>
+      <p class="sp-description mt-3">  {{ checkDescriptionAvailability(selectedHero) }} </p>
       <div class="related-heroes-container">
           <h3>Related Heroes:
             <button class="btn btn-warning">See Related Heroes</button>
